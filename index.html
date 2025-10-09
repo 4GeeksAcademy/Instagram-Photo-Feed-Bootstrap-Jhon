@@ -4,9 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Instagram Feed</title>
+
+  
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
   <style>
     body {
       background-color: #fafafa;
@@ -15,52 +17,33 @@
       background-color: white;
       border-bottom: 1px solid #ddd;
     }
-    .grid-btn {
+    .nav-tabs .nav-link {
       border: none;
-      background: none;
-      color: #333;
-      transition: color 0.3s;
+      color: #555;
+      font-size: 1.5rem;
     }
-    .grid-btn:hover {
+    .nav-tabs .nav-link.active {
       color: #0095f6;
+      border-bottom: 2px solid #0095f6;
     }
     .post-img {
-      width: 100%;
-      height: 350px;
       object-fit: cover;
       border-radius: 8px;
       cursor: pointer;
       transition: transform 0.3s;
     }
     .post-img:hover {
-      transform: scale(1.05);
+      transform: scale(1.03);
     }
-    .container-images {
-      margin-top: 20px;
-    }
-    .active-view {
-      color: #0095f6;
-    }
-    .grid-50 {
-      max-width: 50%;
-      margin: 0 auto;
-    }
-    .like-overlay {
-      position: absolute;
-      bottom: 10px;
-      left: 10px;
-      background: rgba(255,255,255,0.8);
-      padding: 2px 6px;
-      border-radius: 12px;
-      font-size: 0.9rem;
+    .like-text {
+      font-size: 0.95rem;
       font-weight: 500;
-      display: none; /* Se mostrará solo en grid 1 */
     }
   </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
+
 <nav class="navbar navbar-light px-4">
   <div class="d-flex align-items-center">
     <i class="bi bi-instagram fs-4 me-2"></i>
@@ -68,12 +51,12 @@
   </div>
 
   <div class="d-flex align-items-center">
-    <!-- Botón crear post corregido -->
+   
     <button type="button" class="btn btn-success me-3" data-bs-toggle="modal" data-bs-target="#createPostModal">
       Create a new post
     </button>
 
-    <!-- Dropdown configuración -->
+   
     <div class="dropdown">
       <button class="btn btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
         <i class="bi bi-gear-fill fs-5"></i>
@@ -89,62 +72,90 @@
   </div>
 </nav>
 
-<!-- BOTONES DE GRID -->
-<div class="text-center mt-3">
-  <button id="grid3Btn" class="grid-btn active-view me-2">
-    <i class="bi bi-grid-3x3-gap-fill fs-4"></i>
-  </button>
-  <button id="grid1Btn" class="grid-btn">
-    <i class="bi bi-square-fill fs-4"></i>
-  </button>
+
+<ul class="nav nav-tabs justify-content-center mt-3" id="feedTabs" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="grid3-tab" data-bs-toggle="tab" data-bs-target="#grid3" type="button" role="tab">
+      <i class="bi bi-grid-3x3-gap-fill"></i>
+    </button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="grid1-tab" data-bs-toggle="tab" data-bs-target="#grid1" type="button" role="tab">
+      <i class="bi bi-square-fill"></i>
+    </button>
+  </li>
+</ul>
+
+
+<div class="tab-content container mt-4" id="feedTabsContent">
+
+  
+  <div class="tab-pane fade show active" id="grid3" role="tabpanel" aria-labelledby="grid3-tab">
+    <div class="row row-cols-3 g-3">
+      <div class="col"><img src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d" class="post-img" style="height: 250px; width: 100%;" data-bs-toggle="modal" data-bs-target="#imgModal1"></div>
+      <div class="col"><img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" class="post-img" style="height: 250px; width: 100%;" data-bs-toggle="modal" data-bs-target="#imgModal2"></div>
+      <div class="col"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" class="post-img" style="height: 250px; width: 100%;" data-bs-toggle="modal" data-bs-target="#imgModal3"></div>
+      <div class="col"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" class="post-img" style="height: 250px; width: 100%;" data-bs-toggle="modal" data-bs-target="#imgModal4"></div>
+      <div class="col"><img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34" class="post-img" style="height: 250px; width: 100%;" data-bs-toggle="modal" data-bs-target="#imgModal5"></div>
+      <div class="col"><img src="https://images.unsplash.com/photo-1521412644187-c49fa049e84d" class="post-img" style="height: 250px; width: 100%;" data-bs-toggle="modal" data-bs-target="#imgModal6"></div>
+    </div>
+  </div>
+
+  
+  <div class="tab-pane fade" id="grid1" role="tabpanel" aria-labelledby="grid1-tab">
+    <div class="row g-4">
+      <div class="col-12 d-flex flex-column align-items-center">
+        <img src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d" class="post-img" style="height: 200px; width: 70%; max-width: 400px;" data-bs-toggle="modal" data-bs-target="#imgModal1">
+        <div class="text-center mt-2 like-text"><i class="bi bi-heart-fill text-danger"></i> 120 likes</div>
+      </div>
+      <div class="col-12 d-flex flex-column align-items-center">
+        <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" class="post-img" style="height: 200px; width: 70%; max-width: 400px;" data-bs-toggle="modal" data-bs-target="#imgModal2">
+        <div class="text-center mt-2 like-text"><i class="bi bi-heart-fill text-danger"></i> 85 likes</div>
+      </div>
+      <div class="col-12 d-flex flex-column align-items-center">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" class="post-img" style="height: 200px; width: 70%; max-width: 400px;" data-bs-toggle="modal" data-bs-target="#imgModal3">
+        <div class="text-center mt-2 like-text"><i class="bi bi-heart-fill text-danger"></i> 210 likes</div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
-<!-- GRID DE IMÁGENES -->
-<div class="container container-images">
-  <div id="imageGrid" class="row row-cols-3 g-3">
-    <div class="col position-relative">
-      <img src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d" class="post-img" data-bs-toggle="modal" data-bs-target="#imageModal">
-      <div class="like-overlay"><i class="bi bi-heart-fill text-danger"></i> 120 likes</div>
+
+<div class="modal fade" id="imgModal1" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <img src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d" class="img-fluid rounded">
     </div>
-    <div class="col position-relative">
-      <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" class="post-img" data-bs-toggle="modal" data-bs-target="#imageModal">
-      <div class="like-overlay"><i class="bi bi-heart-fill text-danger"></i> 85 likes</div>
+  </div>
+</div>
+<div class="modal fade" id="imgModal2" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" class="img-fluid rounded">
     </div>
-    <div class="col position-relative">
-      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" class="post-img" data-bs-toggle="modal" data-bs-target="#imageModal">
-      <div class="like-overlay"><i class="bi bi-heart-fill text-danger"></i> 210 likes</div>
-    </div>
-    <div class="col position-relative">
-      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" class="post-img" data-bs-toggle="modal" data-bs-target="#imageModal">
-      <div class="like-overlay"><i class="bi bi-heart-fill text-danger"></i> 95 likes</div>
-    </div>
-    <div class="col position-relative">
-      <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34" class="post-img" data-bs-toggle="modal" data-bs-target="#imageModal">
-      <div class="like-overlay"><i class="bi bi-heart-fill text-danger"></i> 180 likes</div>
-    </div>
-    <div class="col position-relative">
-      <img src="https://images.unsplash.com/photo-1521412644187-c49fa049e84d" class="post-img" data-bs-toggle="modal" data-bs-target="#imageModal">
-      <div class="like-overlay"><i class="bi bi-heart-fill text-danger"></i> 60 likes</div>
+  </div>
+</div>
+<div class="modal fade" id="imgModal3" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" class="img-fluid rounded">
     </div>
   </div>
 </div>
 
-<!-- MODAL: Crear nuevo post -->
+
 <div class="modal fade" id="createPostModal" tabindex="-1" aria-labelledby="createPostModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="createPostModalLabel">Create a new post</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="mb-3">
           <label for="caption" class="form-label">Caption:</label>
-          <textarea class="form-control" id="caption" placeholder="Add the caption of your post here"></textarea>
-        </div>
-        <div class="d-flex gap-2">
-          <button class="btn btn-light"><i class="bi bi-camera"></i></button>
-          <button class="btn btn-light"><i class="bi bi-geo-alt"></i></button>
+          <textarea class="form-control" id="caption" rows="3" placeholder="Add your post caption here"></textarea>
         </div>
       </div>
       <div class="modal-footer">
@@ -155,48 +166,8 @@
   </div>
 </div>
 
-<!-- MODAL: Ver imagen -->
-<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <img src="" id="modalImage" class="img-fluid rounded">
-    </div>
-  </div>
-</div>
 
-<script>
-  const grid3Btn = document.getElementById('grid3Btn');
-  const grid1Btn = document.getElementById('grid1Btn');
-  const imageGrid = document.getElementById('imageGrid');
-  const modalImage = document.getElementById('modalImage');
-  const images = document.querySelectorAll('.post-img');
-  const likeOverlays = document.querySelectorAll('.like-overlay');
-
-  // Grid 3 columnas
-  grid3Btn.addEventListener('click', () => {
-    imageGrid.classList.remove('row-cols-1', 'grid-50');
-    imageGrid.classList.add('row-cols-3');
-    grid3Btn.classList.add('active-view');
-    grid1Btn.classList.remove('active-view');
-    likeOverlays.forEach(like => like.style.display = 'none');
-  });
-
-  // Grid 1 columna
-  grid1Btn.addEventListener('click', () => {
-    imageGrid.classList.remove('row-cols-3');
-    imageGrid.classList.add('row-cols-1', 'grid-50');
-    grid1Btn.classList.add('active-view');
-    grid3Btn.classList.remove('active-view');
-    likeOverlays.forEach(like => like.style.display = 'block');
-  });
-
-  // Mostrar imagen en modal
-  images.forEach(img => {
-    img.addEventListener('click', () => {
-      modalImage.src = img.src;
-    });
-  });
-</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
